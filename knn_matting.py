@@ -45,15 +45,18 @@ def knn_matte(img, trimap, mylambda=100):
 
 
 def main():
-    img = scipy.misc.imread('donkey.png')[:,:,:3]
-    trimap = scipy.misc.imread('donkeyTrimap.png')[:,:,:3]
+    import cv2
+    import matplotlib.pyplot as plt
+    img = cv2.imread('donkey.png')
+    img = img[:,:,:3]
+    trimap = cv2.imread('donkeyTrimap.png', -1)
+    trimap= trimap[:,:,:3]
+
     alpha = knn_matte(img, trimap)
-    scipy.misc.imsave('donkeyAlpha.png', alpha)
+    cv2.imsave('donkeyAlpha.png', alpha)
     plt.title('Alpha Matte')
     plt.imshow(alpha, cmap='gray')
     plt.show()
 
 if __name__ == '__main__':
-    import matplotlib.pyplot as plt
-    import scipy.misc
     main()
